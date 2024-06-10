@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Plus, Check, Pencil, Trash } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import AddTodoDialog from "./AddTodoDialog";
+import Todo from "./Todo";
 
 export default function TodoList() {
     
@@ -21,6 +22,7 @@ export default function TodoList() {
     }, []);
 
     useEffect(() => {
+        console.log(todos);
         AsyncStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
 
@@ -42,34 +44,40 @@ export default function TodoList() {
             }
             <VStack space="md">
                 {todos.map((todo) => {
-                    return <HStack key={todo.id} space="md" $base-padding="$3" justifyContent="space-between" backgroundColor="$blue50">
-                        <Text fontSize="$sm">{todo.title}</Text>
-                        <HStack space="xs">
-                            {/* <Button 
-                                size="xs" 
-                                variant="outline" 
-                                action="secondary" 
-                                px="$3"
-                                isDisabled={false} 
-                                isFocusVisible={false} 
-                            >
-                                <ButtonIcon as={Pencil} />
-                            </Button> */}
-                            <Button 
-                                size="xs" 
-                                variant="outline" 
-                                action="secondary" 
-                                px="$3"
-                                isDisabled={false} 
-                                isFocusVisible={false} 
-                                onPress={() => {
-                                    setTodos(prev => prev.filter((item) => item.id !== todo.id));
-                                }}
-                            >
-                                <ButtonIcon as={Trash} />
-                            </Button>
-                        </HStack>
-                    </HStack>
+                    return <Todo 
+                        key={todo.id}
+                        todo={todo}
+                        onDelete={() => setTodos(prev => prev.filter((item) => item.id !== todo.id))}
+                        onEdit={(todos) => setTodos(prev => prev.map((item) => item.id === todo.id ? todo : item))}
+                    />
+                    // <HStack key={todo.id} space="md" $base-padding="$3" justifyContent="space-between" backgroundColor="$blue50">
+                    //     <Text fontSize="$sm">{todo.title}</Text>
+                    //     <HStack space="xs">
+                    //         <Button 
+                    //             size="xs" 
+                    //             variant="outline" 
+                    //             action="secondary" 
+                    //             px="$3"
+                    //             isDisabled={false} 
+                    //             isFocusVisible={false} 
+                    //         >
+                    //             <ButtonIcon as={Pencil} />
+                    //         </Button>
+                    //         <Button 
+                    //             size="xs" 
+                    //             variant="outline" 
+                    //             action="secondary" 
+                    //             px="$3"
+                    //             isDisabled={false} 
+                    //             isFocusVisible={false} 
+                    //             onPress={() => {
+                    //                 setTodos(prev => prev.filter((item) => item.id !== todo.id));
+                    //             }}
+                    //         >
+                    //             <ButtonIcon as={Trash} />
+                    //         </Button>
+                    //     </HStack>
+                    // </HStack>
                 })}
             </VStack>
         </ScrollView>

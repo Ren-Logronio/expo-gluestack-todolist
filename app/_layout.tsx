@@ -11,6 +11,7 @@ import { GluestackUIProvider, Text, Box, SafeAreaView } from "@gluestack-ui/them
 import { config } from "@gluestack-ui/config";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
+import DeleteConfirmationDialogProvider from "@/components/DeleteConfirmationDialog";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -60,7 +61,9 @@ function RootLayoutNav() {
   return (
     <GluestackUIProvider config={config}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Slot />
+        <DeleteConfirmationDialogProvider>
+          <Slot />
+        </DeleteConfirmationDialogProvider>
       </ThemeProvider>
     </GluestackUIProvider>
   );
