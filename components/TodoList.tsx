@@ -22,7 +22,6 @@ export default function TodoList() {
     }, []);
 
     useEffect(() => {
-        console.log(todos);
         AsyncStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
 

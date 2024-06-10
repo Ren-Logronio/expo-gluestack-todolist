@@ -1,8 +1,3 @@
-import Gradient from "../assets/Icons/Gradient";
-import DocumentData from "../assets/Icons/DocumentData";
-import LightBulbPerson from "../assets/Icons/LightbulbPerson";
-import Rocket from "../assets/Icons/Rocket";
-import Logo from "../assets/Icons/Logo";
 import {
   Box,
   Button,
